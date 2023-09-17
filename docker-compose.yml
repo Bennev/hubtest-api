@@ -1,0 +1,16 @@
+version: '3'
+services:
+  hubtest-api-database:
+    container_name: hubtest-api-database
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=hubtest
+    ports:
+      - 5433:5432
+    volumes:
+      - pgdata:/data/postgres
+volumes:
+  pgdata:
+    driver: local
