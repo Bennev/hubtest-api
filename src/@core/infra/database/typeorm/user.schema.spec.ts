@@ -10,7 +10,8 @@ describe('UserSchema Tests', () => {
       synchronize: true,
       logging: false,
       entities: [UserSchema],
-      password: '',
+      username: 'matheus',
+      password: String(process.env.POSTGRES_PASSWORD),
     });
     await dataSource.initialize();
     const user = new User({
