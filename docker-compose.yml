@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=hubtest
     ports:
-      - 5433:5432
+      - 5435:5432
     volumes:
       - pgdata:/data/postgres
 volumes:

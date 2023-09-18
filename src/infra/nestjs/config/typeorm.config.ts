@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { UserSchema } from '../../database/typeorm/user.schema';
+import { UserSchema } from '../../database/typeorm/user/user.schema';
 
 require('dotenv').config();
 export const typeOrmConfig: TypeOrmModuleOptions = {

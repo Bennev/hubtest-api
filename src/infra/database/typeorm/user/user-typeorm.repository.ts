@@ -1,5 +1,5 @@
-import { User } from '../../../domain/users/user.entity';
-import { UserRepositoryInterface } from '../../../domain/users/user.repository';
+import { User } from '../../../../domain/users/user.entity';
+import { UserRepositoryInterface } from '../../../../domain/users/user.repository';
 import { Repository } from 'typeorm';
 
 export class UserTypeOrmRepository implements UserRepositoryInterface {

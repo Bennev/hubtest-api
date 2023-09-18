@@ -20,14 +20,13 @@ export class User {
   public props: Required<UserProps>;
 
   constructor(props: UserConstructor) {
-    this._id = props.id || randomUUID();
-    props.createdAt || new Date();
+    this._id = props && props.id ? props.id : randomUUID();
 
     this.props = {
       ...props,
-      createdAt: props.createdAt || new Date(),
-      name: props.name.replace(/\s+/g, ' ').trim(),
-      email: props.email.replace(/\s+/g, '').trim(),
+      createdAt: props && props.createdAt ? props.createdAt : new Date(),
+      name: props && props.name.replace(/\s+/g, ' ').trim(),
+      email: props && props.email.replace(/\s+/g, '').trim(),
     };
   }
 

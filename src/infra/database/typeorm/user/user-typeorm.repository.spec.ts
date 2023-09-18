@@ -1,15 +1,15 @@
 import { DataSource } from 'typeorm';
 import { UserSchema } from './user.schema';
 import { UserTypeOrmRepository } from './user-typeorm.repository';
-import { User, UserProps } from '../../../domain/users/user.entity';
+import { User, UserProps } from '../../../../domain/users/user.entity';
 
 describe('UserTypeOrmRepository Test', () => {
   it('should create a new user', async () => {
     const dataSource = new DataSource({
-      type: 'postgres',
-      database: ':memory:',
+      type: 'sqlite',
+      database: '../db.sql',
       synchronize: true,
-      logging: true,
+      logging: false,
       entities: [UserSchema],
     });
 

@@ -1,17 +1,15 @@
 import { DataSource } from 'typeorm';
-import { User } from '../../../domain/users/user.entity';
+import { User } from '../../../../domain/users/user.entity';
 import { UserSchema } from './user.schema';
 
 describe('UserSchema Tests', () => {
   test('create', async () => {
     const dataSource = new DataSource({
-      type: 'postgres',
-      database: ':memory:',
+      type: 'sqlite',
+      database: '../db.sql',
       synchronize: true,
       logging: false,
       entities: [UserSchema],
-      username: 'matheus',
-      password: String(process.env.POSTGRES_PASSWORD),
     });
     await dataSource.initialize();
     const user = new User({
