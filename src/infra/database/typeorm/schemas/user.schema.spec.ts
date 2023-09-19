@@ -1,12 +1,12 @@
 import { DataSource } from 'typeorm';
-import { User } from '../../../../domain/users/user.entity';
+import { User } from '../../../../domain/users/user';
 import { UserSchema } from './user.schema';
 
 describe('UserSchema Tests', () => {
   test('create', async () => {
     const dataSource = new DataSource({
       type: 'sqlite',
-      database: '../db.sql',
+      database: './src/infra/database/typeorm/shared/db.sql',
       synchronize: true,
       logging: false,
       entities: [UserSchema],

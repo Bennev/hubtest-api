@@ -1,4 +1,4 @@
-import { User } from './user.entity';
+import { User } from './user';
 
 describe('User Test', () => {
   const userProps = {

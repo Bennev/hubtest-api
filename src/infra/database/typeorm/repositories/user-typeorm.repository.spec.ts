@@ -1,13 +1,13 @@
 import { DataSource } from 'typeorm';
-import { UserSchema } from './user.schema';
+import { UserSchema } from '../schemas/user.schema';
 import { UserTypeOrmRepository } from './user-typeorm.repository';
-import { User, UserProps } from '../../../../domain/users/user.entity';
+import { User, UserProps } from '../../../../domain/users/user';
 
 describe('UserTypeOrmRepository Test', () => {
   it('should create a new user', async () => {
     const dataSource = new DataSource({
       type: 'sqlite',
-      database: '../db.sql',
+      database: './src/infra/database/typeorm/shared/db.sql',
       synchronize: true,
       logging: false,
       entities: [UserSchema],

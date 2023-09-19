@@ -18,10 +18,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate --dataSource ./src/infra/database/typeorm/data-source.ts -p",
-    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run --dataSource ./src/infra/database/typeorm/data-source.ts",
-    "migration:show": "ts-node ./node_modules/typeorm/cli.js migration:show --dataSource ./src/infra/database/typeorm/data-source.ts",
-    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert --dataSource ./src/infra/database/typeorm/data-source.ts"
+    "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -d ./src/infra/database/typeorm/shared/data-source.ts -p",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d ./src/infra/database/typeorm/shared/data-source.ts",
+    "migration:show": "ts-node ./node_modules/typeorm/cli.js migration:show -d ./src/infra/database/typeorm/shared/data-source.ts",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d ./src/infra/database/typeorm/shared/data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

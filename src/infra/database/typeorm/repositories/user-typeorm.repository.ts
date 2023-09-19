@@ -1,4 +1,4 @@
-import { User } from '../../../../domain/users/user.entity';
+import { User } from '../../../../domain/users/user';
 import { UserRepositoryInterface } from '../../../../domain/users/user.repository';
 import { Repository } from 'typeorm';
 

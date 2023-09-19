@@ -1,5 +1,5 @@
 import { UserRepositoryInterface } from '../../../domain/users/user.repository';
-import { User } from '../../../domain/users/user.entity';
+import { User } from '../../../domain/users/user';
 
 export class UserInMemoryRepository implements UserRepositoryInterface {
   items: User[] = [];
