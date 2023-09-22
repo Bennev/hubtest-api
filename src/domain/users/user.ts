@@ -24,9 +24,9 @@ export class User {
 
     this.props = {
       ...props,
-      createdAt: props && props.createdAt ? props.createdAt : new Date(),
-      name: props && props.name.replace(/\s+/g, ' ').trim(),
-      email: props && props.email.replace(/\s+/g, '').trim(),
+      createdAt: props.createdAt ?? new Date(),
+      name: props.name.replace(/\s+/g, ' ').trim(),
+      email: props.email.replace(/\s+/g, '').trim(),
     };
   }
 
@@ -38,20 +38,20 @@ export class User {
     return this.props.name;
   }
 
-  private set name(value: string) {
-    this.props.name = value.replace(/\s+/g, ' ').trim();
-  }
-
   get email(): string {
     return this.props.email;
   }
 
-  private set email(value: string) {
-    this.props.email = value.replace(/\s+/g, '').trim();
-  }
-
   get password(): string {
     return this.props.password;
+  }
+
+  private set name(value: string) {
+    this.props.name = value.replace(/\s+/g, ' ').trim();
+  }
+
+  private set email(value: string) {
+    this.props.email = value.replace(/\s+/g, '').trim();
   }
 
   private set password(value: string) {
