@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { UserSchema } from '../../database/typeorm/schemas/user.schema';
+import { UserTypeOrm } from '../../database/typeorm/entities/user.entity';
 
 require('dotenv').config();
 export const typeOrmConfig: TypeOrmModuleOptions = {
@@ -9,7 +9,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [UserSchema],
+  entities: [UserTypeOrm],
   synchronize: false,
   logging: false,
   migrations: ['../migrations/*{.ts,.js}'],

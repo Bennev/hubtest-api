@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { User } from '../../../../domain/users/user';
-import { UserSchema } from './user.schema';
+import { UserTypeOrm } from './user.entity';
 
 describe('UserSchema Tests', () => {
   test('create', async () => {
@@ -9,7 +9,7 @@ describe('UserSchema Tests', () => {
       database: './src/infra/database/typeorm/shared/db.sql',
       synchronize: true,
       logging: false,
-      entities: [UserSchema],
+      entities: [UserTypeOrm],
     });
     await dataSource.initialize();
     const user = new User({

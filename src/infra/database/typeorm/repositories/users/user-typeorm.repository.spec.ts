@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
-import { UserSchema } from '../schemas/user.schema';
+import { UserTypeOrm } from './user.entity';
 import { UserTypeOrmRepository } from './user-typeorm.repository';
-import { User, UserProps } from '../../../../domain/users/user';
+import { User, UserProps } from '../../../../../domain/users/user';
 
 describe('UserTypeOrmRepository Test', () => {
   it('should create a new user', async () => {
@@ -10,7 +10,7 @@ describe('UserTypeOrmRepository Test', () => {
       database: './src/infra/database/typeorm/shared/db.sql',
       synchronize: true,
       logging: false,
-      entities: [UserSchema],
+      entities: [UserTypeOrm],
     });
 
     await dataSource.initialize();

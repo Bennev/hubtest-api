@@ -4,7 +4,7 @@ import { DataSource } from 'typeorm';
 
 const migrationsDir = resolve(__dirname, '..', 'migrations', '*{.ts,.js}');
 
-const entitiesDir = resolve(__dirname, '..', '**', '*.schema{.ts,.js}');
+const entitiesDir = resolve(__dirname, '..', '**', '*.entity{.ts,.js}');
 
 export const dataSource = new DataSource({
   type: 'postgres',

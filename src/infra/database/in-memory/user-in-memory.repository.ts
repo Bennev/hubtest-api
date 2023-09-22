@@ -4,12 +4,17 @@ import { User } from '../../../domain/users/user';
 export class UserInMemoryRepository implements UserRepositoryInterface {
   items: User[] = [];
 
-  async create(user: User): Promise<void> {
+  async create(user: User): Promise<User> {
     this.items.push(user);
+
+    return user;
   }
 
-  async findOne(id: string): Promise<User> {
-    return this.items.find((item) => item.id === id);
+  async findOne({ where }: { where: Partial<User> }): Promise<User> {
+    if (where.email)
+      return this.items.find((item) => item.email === where.email);
+
+    return this.items.find((item) => item.id === where.id);
   }
 
   async findAll(): Promise<User[]> {
