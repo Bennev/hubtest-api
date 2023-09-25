@@ -7,12 +7,14 @@ import { DefaultError } from '../../../errors/default-error';
 
 export class CreateUserService {
   constructor(
-    private user: UserRepositoryInterface,
+    private userRepository: UserRepositoryInterface,
     private hashPort: HasherPort,
   ) {}
 
   async execute({ name, email, password }: CreateUserDto): Promise<User> {
-    const emailAlreadyExists = await this.user.findOne({ where: { email } });
+    const emailAlreadyExists = await this.userRepository.findOne({
+      where: { email },
+    });
 
     if (emailAlreadyExists)
       throw new DefaultError(errorMessages.email.alreadyUsed, 400);
@@ -25,7 +27,7 @@ export class CreateUserService {
       password: hashedPassword,
     });
 
-    await this.user.create(user);
+    await this.userRepository.create(user);
 
     return user;
   }
