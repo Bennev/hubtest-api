@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm';
 import { User } from '../../../../domain/users/user';
 import { UserTypeOrm } from './user.entity';
 
-describe('UserSchema Tests', () => {
+describe('UserTypeOrm Tests', () => {
   test('create', async () => {
     const dataSource = new DataSource({
       type: 'sqlite',

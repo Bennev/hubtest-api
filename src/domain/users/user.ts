@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { Company } from '../companies/company';
 
 export type UserProps = {
   email: string;
@@ -18,9 +19,10 @@ type UserConstructor = {
 export class User {
   private readonly _id: string;
   public props: Required<UserProps>;
+  private _companies: Company[];
 
   constructor(props: UserConstructor) {
-    this._id = props && props.id ? props.id : randomUUID();
+    this._id = props.id ? props.id : randomUUID();
 
     this.props = {
       ...props,
@@ -46,6 +48,14 @@ export class User {
     return this.props.password;
   }
 
+  get companies(): Company[] {
+    return this._companies;
+  }
+
+  get createdAt(): Date {
+    return this.props.createdAt;
+  }
+
   private set name(value: string) {
     this.props.name = value.replace(/\s+/g, ' ').trim();
   }
@@ -58,7 +68,7 @@ export class User {
     this.props.password = value;
   }
 
-  get createdAt(): Date {
-    return this.props.createdAt;
+  private set companies(value: Company[]) {
+    this._companies = value;
   }
 }

@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { UserTypeOrm } from './user.entity';
+import { UserTypeOrm } from '../../entities/user.entity';
 import { UserTypeOrmRepository } from './user-typeorm.repository';
 import { User, UserProps } from '../../../../../domain/users/user';
 

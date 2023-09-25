@@ -8,6 +8,6 @@ export abstract class CompanyRepositoryInterface {
   }: {
     where: Partial<Company>;
   }): Promise<Company | null>;
-  abstract update(updatedCompany: Company): Promise<Company>;
+  abstract update(updatedCompany: Company): Promise<void>;
   abstract remove(companyId: string): Promise<void>;
 }

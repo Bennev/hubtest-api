@@ -2,8 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CompanyTypeOrm } from './company.entity';
 
 @Entity()
 export class UserTypeOrm {
@@ -18,6 +20,9 @@ export class UserTypeOrm {
 
   @Column()
   password: string;
+
+  @OneToMany(() => CompanyTypeOrm, (company) => company.user)
+  companies: CompanyTypeOrm[];
 
   @CreateDateColumn()
   createdAt: Date;

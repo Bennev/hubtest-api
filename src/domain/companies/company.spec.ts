@@ -12,7 +12,6 @@ describe('Company Test', () => {
       email: 'test@test.com',
       password: 'test',
     }),
-    locations: [],
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -24,8 +23,6 @@ describe('Company Test', () => {
       cnpj: companyProps.cnpj,
       user: companyProps.user,
     });
-
-    console.log({ company });
 
     expect(company).toHaveProperty('id');
     expect(company).toHaveProperty('createdAt');

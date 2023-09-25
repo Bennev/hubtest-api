@@ -1,0 +1,51 @@
+import { Repository } from 'typeorm';
+import { CompanyRepositoryInterface } from '../../../../../domain/companies/company.repository';
+import { Company } from '../../../../../domain/companies/company';
+import CompanyMapper from './company-typeorm.mapper';
+
+export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
+  constructor(private ormRepo: Repository<Company>) {}
+
+  async create(company: Company): Promise<Company> {
+    const newCompany = CompanyMapper.toTypeOrm(company);
+
+    return CompanyMapper.toLocal(await this.ormRepo.save(newCompany));
+  }
+
+  async findOne({ where }: { where: Partial<Company> }): Promise<Company> {
+    const newCompany = CompanyMapper.toTypeOrm(where);
+
+    const userFound = await this.ormRepo.findOne({ where: newCompany });
+
+    if (!userFound) return null;
+    return CompanyMapper.toLocal(userFound);
+  }
+
+  async findAll({ where }: { where: Partial<Company> }): Promise<Company[]> {
+    const companies = await this.ormRepo.find();
+    if (where.user) {
+      const companiesByUser = companies.filter(
+        (company) => company.user.id === where.user.id,
+      );
+      return companiesByUser.map((company) => CompanyMapper.toLocal(company));
+    }
+
+    return companies.map((company) => CompanyMapper.toLocal(company));
+  }
+
+  async update(updatedCompany: Company): Promise<void> {
+    const company = CompanyMapper.toTypeOrm(updatedCompany);
+    await this.ormRepo
+      .createQueryBuilder()
+      .update(company)
+      .set({
+        ...company,
+      })
+      .where('id = :id', { id: company.id })
+      .execute();
+  }
+
+  async remove(companyId: string): Promise<void> {
+    await this.ormRepo.delete(companyId);
+  }
+}

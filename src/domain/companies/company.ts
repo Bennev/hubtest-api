@@ -1,32 +1,32 @@
 import { randomUUID } from 'crypto';
 import { User } from '../users/user';
 
-export type CompaniesProps = {
+export type CompanyProps = {
   name: string;
   website: string;
   cnpj: string;
   user: User;
-  locations: [];
+  // locations: [];
   createdAt: Date;
   updatedAt: Date;
 };
 
-type CompaniesConstructor = {
+type CompanyConstructor = {
   id?: string;
   name: string;
   website: string;
   cnpj: string;
   user?: User;
-  locations?: [];
+  // locations?: [];
   createdAt?: Date;
   updatedAt?: Date;
 };
 
 export class Company {
   private readonly _id: string;
-  public props: Required<CompaniesProps>;
+  public props: Required<CompanyProps>;
 
-  constructor(props: CompaniesConstructor) {
+  constructor(props: CompanyConstructor) {
     this._id = props && props.id ? props.id : randomUUID();
 
     this.props = {
@@ -35,7 +35,7 @@ export class Company {
       createdAt: props.createdAt ?? new Date(),
       updatedAt: props.updatedAt ?? new Date(),
       user: props.user ?? null,
-      locations: props.locations ?? [],
+      // locations: props.locations ?? [],
     };
   }
 
@@ -59,9 +59,9 @@ export class Company {
     return this.props.user;
   }
 
-  get locations(): [] {
-    return this.props.locations;
-  }
+  // get locations(): [] {
+  //   return this.props.locations;
+  // }
 
   get createdAt(): Date {
     return this.props.createdAt;
@@ -87,7 +87,7 @@ export class Company {
     this.props.user = value;
   }
 
-  private set locations(value: []) {
-    this.props.locations = value;
-  }
+  // private set locations(value: []) {
+  //   this.props.locations = value;
+  // }
 }
