@@ -2,16 +2,17 @@ import { User } from '../users/user';
 import { Company } from './company';
 
 describe('Company Test', () => {
+  const user = new User({
+    name: 'Test',
+    email: 'test@test.com',
+    password: 'test',
+  });
   const companyProps = {
     id: 'asd123',
     name: 'Test',
     website: 'test.com',
     cnpj: '123456',
-    user: new User({
-      name: 'Test',
-      email: 'test@test.com',
-      password: 'test',
-    }),
+    userId: user.id,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -21,7 +22,7 @@ describe('Company Test', () => {
       name: companyProps.name,
       website: companyProps.website,
       cnpj: companyProps.cnpj,
-      user: companyProps.user,
+      userId: companyProps.userId,
     });
 
     expect(company).toHaveProperty('id');

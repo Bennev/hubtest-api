@@ -17,7 +17,7 @@ export class CreateUserService {
     });
 
     if (emailAlreadyExists)
-      throw new DefaultError(errorMessages.email.alreadyUsed, 400);
+      throw new DefaultError(errorMessages.user.emailAlreadyUsed, 400);
 
     const hashedPassword = await this.hashPort.hash(password);
 
