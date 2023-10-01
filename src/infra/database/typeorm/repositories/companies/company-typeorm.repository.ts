@@ -12,6 +12,7 @@ export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
     return CompanyMapper.toLocal(await this.ormRepo.save(newCompany));
   }
 
+  //ERROR
   async findOne({ where }: { where: Partial<Company> }): Promise<Company> {
     const newCompany = CompanyMapper.toTypeOrm(where);
 
@@ -21,6 +22,7 @@ export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
     return CompanyMapper.toLocal(userFound);
   }
 
+  //ERROR
   async findAll({ where }: { where: Partial<Company> }): Promise<Company[]> {
     const companies = await this.ormRepo.find();
     if (where.userId) {

@@ -12,6 +12,7 @@ export class UserTypeOrmRepository implements UserRepositoryInterface {
     return UserMapper.toLocal(await this.ormRepo.save(newUser));
   }
 
+  //ERROR
   async findOne({ where }: { where: Partial<User> }): Promise<User> {
     const newUser = UserMapper.toTypeOrm(where);
 
@@ -21,6 +22,7 @@ export class UserTypeOrmRepository implements UserRepositoryInterface {
     return UserMapper.toLocal(userFound);
   }
 
+  //ERROR
   async findAll(): Promise<User[]> {
     const users = await this.ormRepo.find();
 

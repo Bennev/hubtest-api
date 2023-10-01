@@ -56,10 +56,6 @@ export class Company {
     return this.props.userId;
   }
 
-  // get locations(): [] {
-  //   return this.props.locations;
-  // }
-
   get createdAt(): Date {
     return this.props.createdAt;
   }
@@ -83,8 +79,4 @@ export class Company {
   private set userId(value: string) {
     this.props.userId = value;
   }
-
-  // private set locations(value: []) {
-  //   this.props.locations = value;
-  // }
 }
