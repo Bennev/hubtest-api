@@ -13,15 +13,16 @@ describe('CompanyTypeOrm Tests', () => {
       entities: [CompanyTypeOrm],
     });
     await dataSource.initialize();
+    const user = new User({
+      name: 'Test',
+      email: 'test@test.com',
+      password: 'test',
+    });
     const company = new Company({
       name: 'Test',
       website: 'test.com',
       cnpj: '123456',
-      user: new User({
-        name: 'Test',
-        email: 'test@test.com',
-        password: 'test',
-      }),
+      userId: user.id,
     });
     const companyRepo = dataSource.getRepository(Company);
     await companyRepo.save(company);

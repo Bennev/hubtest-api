@@ -16,8 +16,8 @@ export class CompanyInMemoryRepository implements CompanyRepositoryInterface {
   }
 
   async findAll({ where }: { where: Partial<Company> }): Promise<Company[]> {
-    if (where.user) {
-      return this.items.filter((company) => company.user.id === where.user.id);
+    if (where.userId) {
+      return this.items.filter((company) => company.userId === where.userId);
     }
 
     return this.items;

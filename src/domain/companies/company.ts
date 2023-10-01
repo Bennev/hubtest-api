@@ -5,7 +5,6 @@ export type CompanyProps = {
   website: string;
   cnpj: string;
   userId: string;
-  // locations: [];
   createdAt: Date;
   updatedAt: Date;
 };
@@ -16,7 +15,6 @@ type CompanyConstructor = {
   website: string;
   cnpj: string;
   userId?: string;
-  // locations?: [];
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -31,10 +29,10 @@ export class Company {
     this.props = {
       ...props,
       name: props.name.replace(/\s+/g, ' ').trim(),
+      cnpj: props.cnpj.replace(/[^\d]+/g, ''),
       createdAt: props.createdAt ?? new Date(),
       updatedAt: props.updatedAt ?? new Date(),
       userId: props.userId ?? null,
-      // locations: props.locations ?? [],
     };
   }
 
@@ -70,15 +68,15 @@ export class Company {
     return this.props.updatedAt;
   }
 
-  private set name(value: string) {
-    this.props.name = value.replace(/\s+/g, ' ').trim();
+  public set name(value: string) {
+    this.props.name = value;
   }
 
-  private set website(value: string) {
+  public set website(value: string) {
     this.props.website = value;
   }
 
-  private set cnpj(value: string) {
+  public set cnpj(value: string) {
     this.props.cnpj = value;
   }
 

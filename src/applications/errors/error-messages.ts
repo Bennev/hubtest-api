@@ -6,6 +6,7 @@ export const errorMessages = {
     expiredToken: 'Você foi desconectado, faça o login novamente!',
   },
   company: {
+    notFound: 'Empresa não encontrada!',
     cnpjInvalid: 'O CNPJ utilizado é inválido',
     cnpjAlreadyInUse: 'O CNPJ utilizado já está em uso',
   },
