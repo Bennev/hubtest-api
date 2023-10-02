@@ -21,7 +21,7 @@ describe('CompanyTypeOrm Tests', () => {
     const company = new Company({
       name: 'Test',
       website: 'test.com',
-      cnpj: '123456',
+      cnpj: '11.222.333/0001-44',
       userId: user.id,
     });
     const companyRepo = dataSource.getRepository(Company);

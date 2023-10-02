@@ -11,7 +11,7 @@ describe('Company Test', () => {
     id: 'asd123',
     name: 'Test',
     website: 'test.com',
-    cnpj: '123456',
+    cnpj: '11.222.333/0001-44',
     userId: user.id,
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -30,12 +30,13 @@ describe('Company Test', () => {
     expect(company).toHaveProperty('updatedAt');
   });
 
-  it('should be able to create a new user entity with all properties', () => {
+  it('should be able to create a new company entity with all properties', () => {
     const company = new Company(companyProps);
 
     expect(company.id).toEqual(companyProps.id);
     expect(company.name).toEqual(companyProps.name);
     expect(company.website).toEqual(companyProps.website);
-    expect(company.cnpj).toEqual(companyProps.cnpj);
+    expect(company.cnpj).toEqual(companyProps.cnpj.replace(/[^\d]+/g, ''));
+    expect(company.userId).toEqual(companyProps.userId);
   });
 });

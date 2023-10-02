@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserTypeOrm } from './user.entity';
+import { LocationTypeOrm } from './location.entity';
 
 @Entity()
 export class CompanyTypeOrm {
@@ -24,6 +26,9 @@ export class CompanyTypeOrm {
 
   @ManyToOne(() => UserTypeOrm, (user) => user.companies)
   user: UserTypeOrm;
+
+  @OneToMany(() => LocationTypeOrm, (location) => location.company)
+  locations: LocationTypeOrm[];
 
   @CreateDateColumn()
   createdAt: Date;

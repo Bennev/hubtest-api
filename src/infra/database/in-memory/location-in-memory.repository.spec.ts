@@ -1,0 +1,24 @@
+import { Location, LocationProps } from '../../../domain/locations/location';
+import { LocationInMemoryRepository } from './location-in-memory.repository';
+
+describe('LocationInMemoryRepository Test', () => {
+  it('should insert a location user', async () => {
+    const repository = new LocationInMemoryRepository();
+    const locationProps: LocationProps = {
+      name: 'Test',
+      cep: '11.222-333',
+      street: 'street test',
+      number: '123456',
+      neighborhood: 'neighborhood',
+      city: 'city',
+      state: 'state',
+      companyId: 'companyId',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    const location = new Location(locationProps);
+    await repository.create(location);
+    expect(repository.items).toHaveLength(1);
+    expect(repository.items).toStrictEqual([location]);
+  });
+});

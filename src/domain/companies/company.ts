@@ -14,7 +14,7 @@ type CompanyConstructor = {
   name: string;
   website: string;
   cnpj: string;
-  userId?: string;
+  userId: string;
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -24,15 +24,15 @@ export class Company {
   public props: Required<CompanyProps>;
 
   constructor(props: CompanyConstructor) {
-    this._id = props && props.id ? props.id : randomUUID();
+    this._id = props.id ? props.id : randomUUID();
 
     this.props = {
       ...props,
       name: props.name.replace(/\s+/g, ' ').trim(),
       cnpj: props.cnpj.replace(/[^\d]+/g, ''),
+      userId: props.userId ?? null,
       createdAt: props.createdAt ?? new Date(),
       updatedAt: props.updatedAt ?? new Date(),
-      userId: props.userId ?? null,
     };
   }
 

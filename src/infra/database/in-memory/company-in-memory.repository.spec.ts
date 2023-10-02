@@ -1,4 +1,3 @@
-import { User } from '../../../domain/users/user';
 import { Company, CompanyProps } from '../../../domain/companies/company';
 import { CompanyInMemoryRepository } from './company-in-memory.repository';
 
@@ -8,12 +7,8 @@ describe('CompanyInMemoryRepository Test', () => {
     const companyProps: CompanyProps = {
       name: 'Test',
       website: 'test.com',
-      cnpj: '123456',
-      user: new User({
-        name: 'Test',
-        email: 'test@test.com',
-        password: 'test',
-      }),
+      cnpj: '11.222.333/0001-44',
+      userId: 'userId',
       createdAt: new Date(),
       updatedAt: new Date(),
     };

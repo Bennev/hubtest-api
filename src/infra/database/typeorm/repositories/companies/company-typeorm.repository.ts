@@ -16,10 +16,10 @@ export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
   async findOne({ where }: { where: Partial<Company> }): Promise<Company> {
     const newCompany = CompanyMapper.toTypeOrm(where);
 
-    const userFound = await this.ormRepo.findOne({ where: newCompany });
+    const companyFound = await this.ormRepo.findOne({ where: newCompany });
 
-    if (!userFound) return null;
-    return CompanyMapper.toLocal(userFound);
+    if (!companyFound) return null;
+    return CompanyMapper.toLocal(companyFound);
   }
 
   //ERROR

@@ -9,6 +9,7 @@ export default class CompanyMapper {
     companyTypeOrm.name = company.name;
     companyTypeOrm.website = company.website;
     companyTypeOrm.cnpj = company.cnpj;
+    companyTypeOrm.user.id = company.userId;
     companyTypeOrm.createdAt = company.createdAt;
     companyTypeOrm.updatedAt = company.updatedAt;
 
@@ -21,6 +22,7 @@ export default class CompanyMapper {
       name: company.name,
       website: company.website,
       cnpj: company.cnpj,
+      userId: company.user.id,
       createdAt: company.createdAt,
       updatedAt: company.updatedAt,
     });
