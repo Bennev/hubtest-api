@@ -10,4 +10,8 @@ export const errorMessages = {
     cnpjInvalid: 'O CNPJ utilizado é inválido',
     cnpjAlreadyInUse: 'O CNPJ utilizado já está em uso',
   },
+  location: {
+    notFound: 'Local não encontrado!',
+    cepInvalid: 'Cep informado é inválido',
+  },
 };
