@@ -1,40 +1,63 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from '../../../../applications/services/users/create-user/create-user.dto';
+import { CreateUserService } from 'src/applications/services/users/create-user/create-user.service';
+import { FindOneUserService } from 'src/applications/services/users/find-one-user/find-one-user.service';
+import { FindAllUsersService } from 'src/applications/services/users/find-all-users/find-all-users.service';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
+import { UserView } from './user.view';
+import { JwtAuthGuard } from '../../strategies/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly createUser: CreateUserService,
+    private readonly findOneUser: FindOneUserService,
+    private readonly findAllUsers: FindAllUsersService,
+  ) {}
 
+  @ApiCreatedResponse({
+    description: 'User created',
+  })
+  @ApiBadRequestResponse({
+    description: 'Some field has incorrect or missing data',
+  })
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    const newUser = await this.createUser.execute(createUserDto);
+    const user = UserView.toView(newUser);
+    return user;
   }
 
+  @UseGuards(JwtAuthGuard)
+  @ApiOkResponse({
+    description: 'Users list',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Invalid bearer token JWT',
+  })
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findAll() {
+    const allUsers = await this.findAllUsers.execute();
+    const users = allUsers.map((user) => UserView.toView(user));
+    return users;
   }
 
+  @UseGuards(JwtAuthGuard)
+  @ApiOkResponse({
+    description: 'Get User',
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Invalid bearer token JWT',
+  })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async findOne(@Param('id') id: string) {
+    const newUser = await this.findOneUser.execute(id);
+    const user = UserView.toView(newUser);
+    return user;
   }
 }
