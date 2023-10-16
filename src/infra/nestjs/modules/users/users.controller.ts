@@ -49,7 +49,7 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @ApiOkResponse({
-    description: 'Get User',
+    description: 'Specific user information',
   })
   @ApiUnauthorizedResponse({
     description: 'Invalid bearer token JWT',
