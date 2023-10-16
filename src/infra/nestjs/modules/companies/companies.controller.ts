@@ -9,20 +9,20 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../strategies/jwt-auth.guard';
-import { CreateCompanyService } from 'src/applications/services/companies/create-company/create-company.service';
-import { FindOneCompanyService } from 'src/applications/services/companies/find-one-company/find-one-company.service';
-import { FindAllCompaniesService } from 'src/applications/services/companies/find-all-companies/find-all-companies.service';
-import { UpdateCompanyService } from 'src/applications/services/companies/update-company/update-company.service';
-import { RemoveCompanyService } from 'src/applications/services/companies/remove-company/remove-company.service';
+import { CreateCompanyService } from '../../../../applications/services/companies/create-company/create-company.service';
+import { FindOneCompanyService } from '../../../../applications/services/companies/find-one-company/find-one-company.service';
+import { FindAllCompaniesService } from '../../../../applications/services/companies/find-all-companies/find-all-companies.service';
+import { UpdateCompanyService } from '../../../../applications/services/companies/update-company/update-company.service';
+import { RemoveCompanyService } from '../../../../applications/services/companies/remove-company/remove-company.service';
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { CreateCompanyDto } from 'src/applications/services/companies/create-company/create-company.dto';
-import { Company } from 'src/domain/companies/company';
-import { UpdateCompanyDto } from 'src/applications/services/companies/update-company/update-company.dto';
+import { CreateCompanyDto } from '../../../../applications/services/companies/create-company/create-company.dto';
+import { Company } from '../../../../domain/companies/company';
+import { UpdateCompanyDto } from '../../../../applications/services/companies/update-company/update-company.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('companies')
