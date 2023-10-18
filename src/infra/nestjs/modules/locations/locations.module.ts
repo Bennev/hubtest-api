@@ -23,7 +23,7 @@ import { RemoveLocationService } from 'src/applications/services/locations/remov
       ) => {
         return new CreateLocationService(locationRepository, companyRepository);
       },
-      inject: [CompanyRepositoryInterface, CompanyRepositoryInterface],
+      inject: [LocationRepositoryInterface, CompanyRepositoryInterface],
     },
     {
       provide: FindAllLocationsService,
