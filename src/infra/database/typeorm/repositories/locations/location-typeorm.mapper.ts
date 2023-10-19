@@ -2,7 +2,7 @@ import { Location } from '../../../../../domain/locations/location';
 import { LocationTypeOrm } from '../../entities/location.entity';
 
 export default class LocationMapper {
-  public static toTypeOrm(location: Location): LocationTypeOrm {
+  public static toTypeOrm(location: Partial<Location>): LocationTypeOrm {
     const locationTypeOrm = new LocationTypeOrm();
 
     locationTypeOrm.id = location.id;

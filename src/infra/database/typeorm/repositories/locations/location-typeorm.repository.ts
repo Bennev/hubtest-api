@@ -2,9 +2,10 @@ import { Location } from '../../../../../domain/locations/location';
 import { LocationRepositoryInterface } from '../../../../../domain/locations/location.repository';
 import { Repository } from 'typeorm';
 import LocationMapper from './location-typeorm.mapper';
+import { LocationTypeOrm } from '../../entities/location.entity';
 
 export class LocationTypeOrmRepository implements LocationRepositoryInterface {
-  constructor(private ormRepo: Repository<Location>) {}
+  constructor(private ormRepo: Repository<LocationTypeOrm>) {}
 
   async create(company: Location): Promise<Location> {
     const newLocation = LocationMapper.toTypeOrm(company);
@@ -12,7 +13,6 @@ export class LocationTypeOrmRepository implements LocationRepositoryInterface {
     return LocationMapper.toLocal(await this.ormRepo.save(newLocation));
   }
 
-  //ERROR
   async findOne({ where }: { where: Partial<Location> }): Promise<Location> {
     const newLocation = LocationMapper.toTypeOrm(where);
 
@@ -22,12 +22,11 @@ export class LocationTypeOrmRepository implements LocationRepositoryInterface {
     return LocationMapper.toLocal(locationFound);
   }
 
-  //ERROR
   async findAll({ where }: { where: Partial<Location> }): Promise<Location[]> {
     const locations = await this.ormRepo.find();
     if (where.companyId) {
       const locationsByUser = locations.filter(
-        (location) => location.companyId === where.companyId,
+        (location) => location.company.id === where.companyId,
       );
       return locationsByUser.map((location) =>
         LocationMapper.toLocal(location),

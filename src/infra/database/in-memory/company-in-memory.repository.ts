@@ -1,6 +1,20 @@
 import { Company } from 'src/domain/companies/company';
 import { CompanyRepositoryInterface } from '../../../domain/companies/company.repository';
 
+const verifyWhere = ({
+  where,
+  company,
+}: {
+  where: Partial<Company>;
+  company: Company;
+}) => {
+  if (where?.id && company.id !== where.id) return false;
+  if (where?.name && company.name !== where.name) return false;
+  if (where?.cnpj && company.cnpj !== where.cnpj) return false;
+  if (where?.website && company.website !== where.website) return false;
+  return true;
+};
+
 export class CompanyInMemoryRepository implements CompanyRepositoryInterface {
   items: Company[] = [];
 
@@ -11,16 +25,11 @@ export class CompanyInMemoryRepository implements CompanyRepositoryInterface {
   }
 
   async findOne({ where }: { where: Partial<Company> }): Promise<Company> {
-    const foundCompany = this.items.find((company) => company.id === where.id);
-    return foundCompany;
+    return this.items.find((company) => verifyWhere({ where, company }));
   }
 
   async findAll({ where }: { where: Partial<Company> }): Promise<Company[]> {
-    if (where.userId) {
-      return this.items.filter((company) => company.userId === where.userId);
-    }
-
-    return this.items;
+    return this.items.filter((company) => verifyWhere({ where, company }));
   }
 
   async update(updatedCompany: Company): Promise<void> {

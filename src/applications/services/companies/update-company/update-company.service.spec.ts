@@ -5,7 +5,6 @@ import { Company } from '../../../../domain/companies/company';
 import { DefaultError } from '../../../errors/default-error';
 import { errorMessages } from '../../../errors/error-messages';
 
-//ERROR
 describe('Update Company Service', () => {
   let company: Company;
   const companyRepository = new CompanyInMemoryRepository();
@@ -16,7 +15,7 @@ describe('Update Company Service', () => {
     password: 'test-password',
   });
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     company = await companyRepository.create(
       new Company({
         name: 'Test',
@@ -58,7 +57,6 @@ describe('Update Company Service', () => {
     );
   });
 
-  // Error - Não está achando empresa com o mesmo CNPJ
   it('should not be able to update a company with a cnpj already used', async () => {
     const newCompany = await companyRepository.create(
       new Company({
@@ -69,15 +67,14 @@ describe('Update Company Service', () => {
       }),
     );
 
-    expect(
-      async () =>
-        await updateCompanyService.execute(
-          {
-            cnpj: '11.222.333/0001-44',
-          },
-          newCompany.id,
-        ),
-    ).rejects.toThrow(
+    expect(async () => {
+      await updateCompanyService.execute(
+        {
+          cnpj: '11.222.333/0001-44',
+        },
+        newCompany.id,
+      );
+    }).rejects.toThrow(
       new DefaultError(errorMessages.company.cnpjAlreadyInUse, 400),
     );
   });

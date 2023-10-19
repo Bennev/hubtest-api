@@ -2,9 +2,10 @@ import { Repository } from 'typeorm';
 import { CompanyRepositoryInterface } from '../../../../../domain/companies/company.repository';
 import { Company } from '../../../../../domain/companies/company';
 import CompanyMapper from './company-typeorm.mapper';
+import { CompanyTypeOrm } from '../../entities/company.entity';
 
 export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
-  constructor(private ormRepo: Repository<Company>) {}
+  constructor(private ormRepo: Repository<CompanyTypeOrm>) {}
 
   async create(company: Company): Promise<Company> {
     const newCompany = CompanyMapper.toTypeOrm(company);
@@ -12,22 +13,21 @@ export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
     return CompanyMapper.toLocal(await this.ormRepo.save(newCompany));
   }
 
-  //ERROR
   async findOne({ where }: { where: Partial<Company> }): Promise<Company> {
     const newCompany = CompanyMapper.toTypeOrm(where);
 
     const companyFound = await this.ormRepo.findOne({ where: newCompany });
 
     if (!companyFound) return null;
+
     return CompanyMapper.toLocal(companyFound);
   }
 
-  //ERROR
   async findAll({ where }: { where: Partial<Company> }): Promise<Company[]> {
     const companies = await this.ormRepo.find();
     if (where.userId) {
       const companiesByUser = companies.filter(
-        (company) => company.userId === where.userId,
+        (company) => company.user.id === where.userId,
       );
       return companiesByUser.map((company) => CompanyMapper.toLocal(company));
     }

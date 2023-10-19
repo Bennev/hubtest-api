@@ -9,7 +9,6 @@ import {
 } from 'typeorm';
 import { UserTypeOrm } from './user.entity';
 import { LocationTypeOrm } from './location.entity';
-
 @Entity()
 export class CompanyTypeOrm {
   @PrimaryGeneratedColumn('uuid')
