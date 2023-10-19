@@ -12,6 +12,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       stopAtFirstError: true,
+      transform: true,
     }),
   );
 
@@ -20,6 +21,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerOptions);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(3333);
 }
 bootstrap();

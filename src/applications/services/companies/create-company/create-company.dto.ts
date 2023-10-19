@@ -1,4 +1,4 @@
-export class CreateCompanyDto {
+export interface CreateCompanyDtoInterface {
   name: string;
   website: string;
   cnpj: string;

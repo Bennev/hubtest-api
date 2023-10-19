@@ -1,9 +1,9 @@
 import { UserRepositoryInterface } from '../../../../domain/users/user.repository';
 import { CompanyRepositoryInterface } from '../../../../domain/companies/company.repository';
-import { CreateCompanyDto } from './create-company.dto';
 import { DefaultError } from '../../../errors/default-error';
 import { errorMessages } from '../../../errors/error-messages';
 import { Company } from '../../../../domain/companies/company';
+import { CreateCompanyDtoInterface } from './create-company.dto';
 
 export class CreateCompanyService {
   constructor(
@@ -16,12 +16,12 @@ export class CreateCompanyService {
     cnpj,
     website,
     userId,
-  }: CreateCompanyDto): Promise<Company> {
+  }: CreateCompanyDtoInterface): Promise<Company> {
     const formattedName = name.replace(/\s+/g, ' ').trim();
     const isCnpj = cnpj.replace(/[^\d]+/g, '');
     const CNPJ_LENGTH = 14;
 
-    if (!isCnpj || isCnpj.length !== CNPJ_LENGTH)
+    if (isCnpj.length !== CNPJ_LENGTH)
       throw new DefaultError(errorMessages.company.cnpjInvalid, 400);
 
     const companyWithSameCnpj = await this.companyRepository.findOne({

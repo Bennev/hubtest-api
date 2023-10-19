@@ -25,7 +25,7 @@ export class AuthController {
   async signIn(@Body() authDto: AuthDto) {
     const user = await this.verifyPasswordService.execute(authDto);
     const token = await this.authUserService.execute(user.id);
-    return token;
+    return { token };
   }
 
   @ApiOkResponse({

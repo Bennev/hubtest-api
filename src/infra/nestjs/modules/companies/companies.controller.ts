@@ -20,9 +20,9 @@ import {
   ApiOkResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { CreateCompanyDto } from '../../../../applications/services/companies/create-company/create-company.dto';
 import { Company } from '../../../../domain/companies/company';
 import { UpdateCompanyDto } from '../../../../applications/services/companies/update-company/update-company.dto';
+import { CreateCompanyDto } from './create-company.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('companies')

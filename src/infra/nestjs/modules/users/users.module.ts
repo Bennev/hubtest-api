@@ -50,5 +50,6 @@ import { FindAllUsersService } from 'src/applications/services/users/find-all-us
       inject: [UserRepositoryInterface, HasherPort],
     },
   ],
+  exports: [VerifyPasswordService],
 })
 export class UsersModule {}
