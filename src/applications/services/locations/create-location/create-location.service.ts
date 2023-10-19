@@ -1,7 +1,7 @@
 import { Location } from '../../../../domain/locations/location';
 import { CompanyRepositoryInterface } from '../../../../domain/companies/company.repository';
 import { LocationRepositoryInterface } from '../../../../domain/locations/location.repository';
-import { CreateLocationDto } from './create-location.dto';
+import { CreateLocationDtoInterface } from './create-location.dto';
 import { DefaultError } from '../../../errors/default-error';
 import { errorMessages } from '../../../errors/error-messages';
 
@@ -20,7 +20,7 @@ export class CreateLocationService {
     city,
     state,
     companyId,
-  }: CreateLocationDto): Promise<Location> {
+  }: CreateLocationDtoInterface): Promise<Location> {
     const company = await this.companyRepository.findOne({
       where: { id: companyId },
     });

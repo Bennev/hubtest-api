@@ -1,6 +1,6 @@
 import { HasherPort } from '../../../ports/hasher.port';
 import { User } from '../../../../domain/users/user';
-import { CreateUserDto } from './create-user.dto';
+import { CreateUserDtoInterface } from './create-user.dto';
 import { UserRepositoryInterface } from '../../../../domain/users/user.repository';
 import { errorMessages } from '../../../errors/error-messages';
 import { DefaultError } from '../../../errors/default-error';
@@ -11,7 +11,11 @@ export class CreateUserService {
     private hashPort: HasherPort,
   ) {}
 
-  async execute({ name, email, password }: CreateUserDto): Promise<User> {
+  async execute({
+    name,
+    email,
+    password,
+  }: CreateUserDtoInterface): Promise<User> {
     const emailAlreadyExists = await this.userRepository.findOne({
       where: { email },
     });

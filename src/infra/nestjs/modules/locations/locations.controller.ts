@@ -20,9 +20,9 @@ import {
   ApiOkResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { CreateLocationDto } from '../../../../applications/services/locations/create-location/create-location.dto';
 import { Location } from '../../../../domain/locations/location';
 import { UpdateLocationDto } from '../../../../applications/services/locations/update-location/update-location.dto';
+import { CreateLocationDto } from './create-location.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('locations')

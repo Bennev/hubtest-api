@@ -1,5 +1,4 @@
 import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
-import { CreateUserDto } from '../../../../applications/services/users/create-user/create-user.dto';
 import { CreateUserService } from '../../../../applications/services/users/create-user/create-user.service';
 import { FindOneUserService } from '../../../../applications/services/users/find-one-user/find-one-user.service';
 import { FindAllUsersService } from '../../../../applications/services/users/find-all-users/find-all-users.service';
@@ -11,6 +10,7 @@ import {
 } from '@nestjs/swagger';
 import { UserView } from './user.view';
 import { JwtAuthGuard } from '../../strategies/jwt-auth.guard';
+import { CreateUserDto } from './create-user.dto';
 
 @Controller('users')
 export class UsersController {

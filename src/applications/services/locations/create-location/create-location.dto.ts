@@ -1,4 +1,4 @@
-export class CreateLocationDto {
+export class CreateLocationDtoInterface {
   name: string;
   cep: string;
   street: string;
