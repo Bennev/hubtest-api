@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
-import { AuthUserService } from 'src/applications/services/auth/auth-user/auth-user.service';
-import { VerifyTokenService } from 'src/applications/services/auth/verify-token/verify-token.service';
+import { AuthUserService } from '../../../../applications/services/auth/auth-user/auth-user.service';
+import { VerifyTokenService } from '../../../../applications/services/auth/verify-token/verify-token.service';
 import { AuthDto } from './auth.dto';
-import { VerifyPasswordService } from 'src/applications/services/auth/verify-password/verify-password.service';
+import { VerifyPasswordService } from '../../../../applications/services/users/verify-password/verify-password.service';
 import { LocalAuthGuard } from '../../strategies/local-auth.guard';
 import { ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 

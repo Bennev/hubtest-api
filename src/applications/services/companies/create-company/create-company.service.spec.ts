@@ -31,6 +31,6 @@ describe('Create Company Service', () => {
     expect(company).toHaveProperty('id');
     expect(company.name).toBe('Test 123');
     expect(company.cnpj).toBe('11.222.333/0001-44'.replace(/[^\d]+/g, ''));
-    expect(companyRepository.items).toHaveLength(2);
+    expect(companyRepository.items).toHaveLength(1);
   });
 });
