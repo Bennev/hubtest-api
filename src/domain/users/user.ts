@@ -51,11 +51,11 @@ export class User {
   }
 
   private set name(value: string) {
-    this.props.name = value.replace(/\s+/g, ' ').trim();
+    this.props.name = value;
   }
 
   private set email(value: string) {
-    this.props.email = value.replace(/\s+/g, '').trim();
+    this.props.email = value;
   }
 
   private set password(value: string) {
