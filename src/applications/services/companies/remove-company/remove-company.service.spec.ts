@@ -20,7 +20,7 @@ describe('Remove Company Service', () => {
         name: 'Test',
         website: 'test.com',
         cnpj: '11.222.333/0001-44',
-        userId: user.id,
+        user,
       }),
     );
 

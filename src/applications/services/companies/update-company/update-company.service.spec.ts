@@ -21,7 +21,7 @@ describe('Update Company Service', () => {
         name: 'Test',
         website: 'test.com',
         cnpj: '11.222.333/0001-44',
-        userId: user.id,
+        user,
       }),
     );
   });
@@ -63,7 +63,7 @@ describe('Update Company Service', () => {
         name: 'Test',
         website: 'test.com',
         cnpj: '44.333.222/0001-11',
-        userId: user.id,
+        user,
       }),
     );
 

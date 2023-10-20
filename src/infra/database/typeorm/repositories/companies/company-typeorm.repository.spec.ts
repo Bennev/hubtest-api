@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import { CompanyTypeOrm } from '../../entities/company.entity';
 import { CompanyTypeOrmRepository } from './company-typeorm.repository';
 import { Company, CompanyProps } from '../../../../../domain/companies/company';
+import { User } from '../../../../../domain/users/user';
 
 describe('CompanyTypeOrmRepository Test', () => {
   it('should create a new company', async () => {
@@ -15,13 +16,18 @@ describe('CompanyTypeOrmRepository Test', () => {
 
     await dataSource.initialize();
 
-    const ormRepo = dataSource.getRepository(Company);
+    const ormRepo = dataSource.getRepository(CompanyTypeOrm);
     const repository = new CompanyTypeOrmRepository(ormRepo);
+    const user = new User({
+      name: 'Test',
+      email: 'test@test.com',
+      password: 'test',
+    });
     const companyProps: CompanyProps = {
       name: 'Test',
       website: 'test.com',
       cnpj: '11.222.333/0001-44',
-      userId: 'userId',
+      user,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -33,7 +39,7 @@ describe('CompanyTypeOrmRepository Test', () => {
     expect(companyFound.name).toEqual(company.name);
     expect(companyFound.website).toEqual(company.website);
     expect(companyFound.cnpj).toEqual(company.cnpj);
-    expect(companyFound.userId).toEqual(company.userId);
+    expect(companyFound.user).toEqual(company.user);
     expect(companyFound.createdAt).toEqual(company.createdAt);
     expect(companyFound.updatedAt).toEqual(company.updatedAt);
   });

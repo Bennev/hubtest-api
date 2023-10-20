@@ -23,7 +23,7 @@ describe('LocationTypeOrm Tests', () => {
       name: 'Test',
       website: 'test.com',
       cnpj: '11.222.333/0001-44',
-      userId: user.id,
+      user,
     });
     const location = new Location({
       name: 'Test',
@@ -33,7 +33,7 @@ describe('LocationTypeOrm Tests', () => {
       neighborhood: 'neighborhood',
       city: 'city',
       state: 'state',
-      companyId: company.id,
+      company,
     });
     const locationRepo = dataSource.getRepository(Location);
     await locationRepo.save(location);

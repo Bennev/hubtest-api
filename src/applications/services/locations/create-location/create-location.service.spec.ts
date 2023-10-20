@@ -4,6 +4,7 @@ import { CompanyInMemoryRepository } from '../../../../infra/database/in-memory/
 import { LocationInMemoryRepository } from '../../../../infra/database/in-memory/location-in-memory.repository';
 import { CreateLocationService } from './create-location.service';
 import { errorMessages } from '../../../errors/error-messages';
+import { User } from '../../../../domain/users/user';
 
 describe('Create Location Service', () => {
   const companyRepository = new CompanyInMemoryRepository();
@@ -12,6 +13,11 @@ describe('Create Location Service', () => {
     locationRepository,
     companyRepository,
   );
+  const user = new User({
+    name: 'test-name',
+    email: 'test@email.com',
+    password: 'test-password',
+  });
   let company: Company;
 
   beforeAll(async () => {
@@ -20,7 +26,7 @@ describe('Create Location Service', () => {
         name: ' Test       123 ',
         website: 'test.com',
         cnpj: '11.222.333/0001-44',
-        userId: 'userId',
+        user,
       }),
     );
   });

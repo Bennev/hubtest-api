@@ -20,7 +20,7 @@ describe('Find One Company', () => {
         name: 'Test',
         website: 'test.com',
         cnpj: '11.222.333/0001-44',
-        userId: user.id,
+        user,
       }),
     );
 

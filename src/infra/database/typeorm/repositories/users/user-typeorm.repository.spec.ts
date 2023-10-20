@@ -15,7 +15,7 @@ describe('UserTypeOrmRepository Test', () => {
 
     await dataSource.initialize();
 
-    const ormRepo = dataSource.getRepository(User);
+    const ormRepo = dataSource.getRepository(UserTypeOrm);
     const repository = new UserTypeOrmRepository(ormRepo);
     const userProps: UserProps = {
       name: 'Test',

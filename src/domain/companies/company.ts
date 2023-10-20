@@ -31,9 +31,9 @@ export class Company {
 
   constructor(props: CompanyConstructor) {
     this._id = props.id ? props.id : randomUUID();
-    this._name = props.name;
+    this._name = props.name.replace(/\s+/g, ' ').trim();
     this._website = props.website;
-    this._cnpj = props.cnpj;
+    this._cnpj = props.cnpj.replace(/[^\d]+/g, '');
     this._user = props.user ?? null;
     this._createdAt = props.createdAt ?? new Date();
     this._updatedAt = props.updatedAt ?? new Date();
@@ -68,7 +68,7 @@ export class Company {
   }
 
   set name(value: string) {
-    this._name = value.replace(/\s+/g, ' ').trim();
+    this._name = value;
   }
 
   set website(value: string) {
@@ -76,7 +76,7 @@ export class Company {
   }
 
   set cnpj(value: string) {
-    this._cnpj = value.replace(/[^\d]+/g, '');
+    this._cnpj = value;
   }
 
   set user(value: User) {

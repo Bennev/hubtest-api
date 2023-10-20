@@ -12,7 +12,7 @@ describe('Location Test', () => {
     name: 'Test-company',
     website: 'test-company.com',
     cnpj: '11.222.333/0001-44',
-    userId: user.id,
+    user,
   });
   const locationProps = {
     id: 'asd123',
@@ -23,7 +23,7 @@ describe('Location Test', () => {
     neighborhood: 'neighborhood',
     city: 'city',
     state: 'state',
-    companyId: company.id,
+    company,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -37,7 +37,7 @@ describe('Location Test', () => {
       neighborhood: locationProps.neighborhood,
       city: locationProps.city,
       state: locationProps.state,
-      companyId: locationProps.companyId,
+      company: locationProps.company,
     });
 
     expect(location).toHaveProperty('id');
@@ -56,6 +56,6 @@ describe('Location Test', () => {
     expect(location.neighborhood).toEqual(locationProps.neighborhood);
     expect(location.city).toEqual(locationProps.city);
     expect(location.state).toEqual(locationProps.state);
-    expect(location.companyId).toEqual(locationProps.companyId);
+    expect(location.company).toEqual(locationProps.company);
   });
 });

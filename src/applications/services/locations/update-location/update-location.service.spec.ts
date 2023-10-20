@@ -4,16 +4,22 @@ import { UpdateLocationService } from './update-location.service';
 import { Company } from '../../../../domain/companies/company';
 import { DefaultError } from '../../../errors/default-error';
 import { errorMessages } from '../../../errors/error-messages';
+import { User } from '../../../../domain/users/user';
 
 describe('Update Location Service', () => {
   let location: Location;
   const locationRepository = new LocationInMemoryRepository();
   const updateLocationService = new UpdateLocationService(locationRepository);
+  const user = new User({
+    name: 'test-name',
+    email: 'test@email.com',
+    password: 'test-password',
+  });
   const company = new Company({
     name: ' Test       123 ',
     website: 'test.com',
     cnpj: '11.222.333/0001-44',
-    userId: 'userId',
+    user,
   });
 
   beforeAll(async () => {
@@ -26,7 +32,7 @@ describe('Update Location Service', () => {
         neighborhood: 'neighborhood',
         city: 'city',
         state: 'state',
-        companyId: company.id,
+        company,
       }),
     );
   });

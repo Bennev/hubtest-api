@@ -4,17 +4,23 @@ import { FindOneLocationService } from './find-one-locations.service';
 import { Location } from '../../../../domain/locations/location';
 import { DefaultError } from '../../../errors/default-error';
 import { errorMessages } from '../../../errors/error-messages';
+import { User } from '../../../../domain/users/user';
 
 describe('Find One Location', () => {
   const locationRepository = new LocationInMemoryRepository();
   const findOneLocationService = new FindOneLocationService(locationRepository);
+  const user = new User({
+    name: 'test-name',
+    email: 'test@email.com',
+    password: 'test-password',
+  });
 
   it('should be able to find a location', async () => {
     const company = new Company({
       name: ' Test       123 ',
       website: 'test.com',
       cnpj: '11.222.333/0001-44',
-      userId: 'userId',
+      user,
     });
 
     const location = await locationRepository.create(
@@ -26,7 +32,7 @@ describe('Find One Location', () => {
         neighborhood: 'neighborhood',
         city: 'city',
         state: 'state',
-        companyId: company.id,
+        company,
       }),
     );
 

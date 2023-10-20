@@ -20,20 +20,28 @@ describe('Find All Companies by User', () => {
         name: 'Test',
         website: 'test.com',
         cnpj: '11.222.333/0001-44',
-        userId: user.id,
+        user,
       }),
     );
+
+    const fakeUser = new User({
+      name: 'fake-name',
+      email: 'fake@email.com',
+      password: 'fake-password',
+    });
 
     await companyRepository.create(
       new Company({
         name: 'Test',
         website: 'test.com',
         cnpj: '11.222.333/0001-44',
-        userId: 'fake-user-id',
+        user: fakeUser,
       }),
     );
 
-    const companies = await findAllCompaniesService.execute(user.id);
+    const companies = await findAllCompaniesService.execute({
+      where: { user },
+    });
 
     expect(companies).toBeDefined();
     expect(companies).toHaveLength(1);

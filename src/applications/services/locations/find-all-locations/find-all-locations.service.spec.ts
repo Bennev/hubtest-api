@@ -2,19 +2,25 @@ import { LocationInMemoryRepository } from '../../../../infra/database/in-memory
 import { FindAllLocationsService } from './find-all-locations.service';
 import { Company } from '../../../../domain/companies/company';
 import { Location } from '../../../../domain/locations/location';
+import { User } from '../../../../domain/users/user';
 
 describe('Find All Locations by Company', () => {
   const locationRepository = new LocationInMemoryRepository();
   const findAllLocationsService = new FindAllLocationsService(
     locationRepository,
   );
+  const user = new User({
+    name: 'test-name',
+    email: 'test@email.com',
+    password: 'test-password',
+  });
 
   it('should be able to find all locations by company', async () => {
     const company = new Company({
       name: ' Test       123 ',
       website: 'test.com',
       cnpj: '11.222.333/0001-44',
-      userId: 'userId',
+      user,
     });
 
     await locationRepository.create(
@@ -26,9 +32,16 @@ describe('Find All Locations by Company', () => {
         neighborhood: 'neighborhood',
         city: 'city',
         state: 'state',
-        companyId: company.id,
+        company,
       }),
     );
+
+    const fakeCompany = new Company({
+      name: ' Test       123 ',
+      website: 'test.com',
+      cnpj: '44.333.222/0001-11',
+      user,
+    });
 
     await locationRepository.create(
       new Location({
@@ -39,11 +52,13 @@ describe('Find All Locations by Company', () => {
         neighborhood: 'neighborhood',
         city: 'city',
         state: 'state',
-        companyId: 'fake-company-id',
+        company: fakeCompany,
       }),
     );
 
-    const locations = await findAllLocationsService.execute(company.id);
+    const locations = await findAllLocationsService.execute({
+      where: { company },
+    });
 
     expect(locations).toBeDefined();
     expect(locations).toHaveLength(1);

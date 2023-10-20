@@ -12,7 +12,7 @@ describe('Company Test', () => {
     name: 'Test',
     website: 'test.com',
     cnpj: '11.222.333/0001-44',
-    userId: user.id,
+    user,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -22,7 +22,7 @@ describe('Company Test', () => {
       name: companyProps.name,
       website: companyProps.website,
       cnpj: companyProps.cnpj,
-      userId: companyProps.userId,
+      user: companyProps.user,
     });
 
     expect(company).toHaveProperty('id');
@@ -32,11 +32,12 @@ describe('Company Test', () => {
 
   it('should be able to create a new company entity with all properties', () => {
     const company = new Company(companyProps);
+    console.log({ company });
 
     expect(company.id).toEqual(companyProps.id);
     expect(company.name).toEqual(companyProps.name);
     expect(company.website).toEqual(companyProps.website);
     expect(company.cnpj).toEqual(companyProps.cnpj.replace(/[^\d]+/g, ''));
-    expect(company.userId).toEqual(companyProps.userId);
+    expect(company.user).toEqual(companyProps.user);
   });
 });
