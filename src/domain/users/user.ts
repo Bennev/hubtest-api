@@ -17,17 +17,17 @@ type UserConstructor = {
 
 export class User {
   private readonly _id: string;
-  public props: Required<UserProps>;
+  private _email: string;
+  private _name: string;
+  private _password: string;
+  private _createdAt: Date;
 
   constructor(props: UserConstructor) {
     this._id = props.id ? props.id : randomUUID();
-
-    this.props = {
-      ...props,
-      createdAt: props.createdAt ?? new Date(),
-      name: props.name.replace(/\s+/g, ' ').trim(),
-      email: props.email.replace(/\s+/g, '').trim(),
-    };
+    this._email = props.email.replace(/\s+/g, '').trim();
+    this._name = props.name.replace(/\s+/g, ' ').trim();
+    this._password = props.password;
+    this._createdAt = props.createdAt ?? new Date();
   }
 
   get id(): string {
@@ -35,30 +35,30 @@ export class User {
   }
 
   get name(): string {
-    return this.props.name;
+    return this._name;
   }
 
   get email(): string {
-    return this.props.email;
+    return this._email;
   }
 
   get password(): string {
-    return this.props.password;
+    return this._password;
   }
 
   get createdAt(): Date {
-    return this.props.createdAt;
+    return this._createdAt;
   }
 
-  private set name(value: string) {
-    this.props.name = value;
+  set name(value: string) {
+    this._name = value;
   }
 
-  private set email(value: string) {
-    this.props.email = value;
+  set email(value: string) {
+    this._email = value;
   }
 
-  private set password(value: string) {
-    this.props.password = value;
+  set password(value: string) {
+    this._password = value;
   }
 }
