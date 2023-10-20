@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { Company } from '../companies/company';
 
 export type LocationProps = {
   name: string;
@@ -8,7 +9,7 @@ export type LocationProps = {
   neighborhood: string;
   city: string;
   state: string;
-  companyId: string;
+  company: Company | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -22,7 +23,7 @@ type LocationConstructor = {
   neighborhood: string;
   city: string;
   state: string;
-  companyId: string;
+  company?: Company;
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -43,7 +44,7 @@ export class Location {
       neighborhood: props.neighborhood.replace(/\s+/g, ' ').trim(),
       city: props.city.replace(/\s+/g, ' ').trim(),
       state: props.state.replace(/\s+/g, ' ').trim(),
-      companyId: props.companyId ?? null,
+      company: props.company ?? null,
       createdAt: props.createdAt ?? new Date(),
       updatedAt: props.updatedAt ?? new Date(),
     };
@@ -81,8 +82,8 @@ export class Location {
     return this.props.state;
   }
 
-  get companyId(): string {
-    return this.props.companyId;
+  get company(): Company {
+    return this.props.company;
   }
 
   get createdAt(): Date {
@@ -121,7 +122,7 @@ export class Location {
     this.props.state = value;
   }
 
-  public set companyId(value: string) {
-    this.props.companyId = value;
+  public set company(value: Company) {
+    this.props.company = value;
   }
 }

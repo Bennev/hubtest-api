@@ -41,7 +41,7 @@ export class CreateLocationService {
       neighborhood,
       city,
       state,
-      companyId,
+      company,
     });
 
     return await this.locationRepository.create(location);

@@ -5,7 +5,7 @@ export abstract class LocationRepositoryInterface {
   abstract findAll({
     where,
   }: {
-    where: Partial<Location>;
+    where?: Partial<Location>;
   }): Promise<Location[]>;
   abstract findOne({
     where,

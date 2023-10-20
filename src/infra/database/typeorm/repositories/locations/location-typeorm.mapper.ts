@@ -13,7 +13,6 @@ export default class LocationMapper {
     locationTypeOrm.neighborhood = location.neighborhood;
     locationTypeOrm.city = location.city;
     locationTypeOrm.state = location.state;
-    locationTypeOrm.company.id = location.companyId;
     locationTypeOrm.createdAt = location.createdAt;
     locationTypeOrm.updatedAt = location.updatedAt;
 
@@ -30,7 +29,6 @@ export default class LocationMapper {
       neighborhood: location.neighborhood,
       city: location.city,
       state: location.state,
-      companyId: location.company.id,
       createdAt: location.createdAt,
       updatedAt: location.updatedAt,
     });

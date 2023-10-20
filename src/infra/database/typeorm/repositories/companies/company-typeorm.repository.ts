@@ -15,6 +15,7 @@ export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
 
   async findOne({ where }: { where: Partial<Company> }): Promise<Company> {
     const newCompany = CompanyMapper.toTypeOrm(where);
+    console.log('teste');
 
     const companyFound = await this.ormRepo.findOne({ where: newCompany });
 
@@ -25,9 +26,9 @@ export class CompanyTypeOrmRepository implements CompanyRepositoryInterface {
 
   async findAll({ where }: { where: Partial<Company> }): Promise<Company[]> {
     const companies = await this.ormRepo.find();
-    if (where.userId) {
+    if (where.user) {
       const companiesByUser = companies.filter(
-        (company) => company.user.id === where.userId,
+        (company) => company.user.id === where.user.id,
       );
       return companiesByUser.map((company) => CompanyMapper.toLocal(company));
     }

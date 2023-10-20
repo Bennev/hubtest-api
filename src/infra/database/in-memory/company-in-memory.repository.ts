@@ -12,7 +12,7 @@ const verifyWhere = ({
   if (where?.name && company.name !== where.name) return false;
   if (where?.cnpj && company.cnpj !== where.cnpj) return false;
   if (where?.website && company.website !== where.website) return false;
-  if (where?.userId && company.userId !== where.userId) return false;
+  if (where?.user && company.user.id !== where.user.id) return false;
   return true;
 };
 

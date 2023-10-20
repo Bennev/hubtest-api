@@ -17,7 +17,7 @@ const verifyWhere = ({
     return false;
   if (where?.city && location.city !== where.city) return false;
   if (where?.state && location.state !== where.state) return false;
-  if (where?.companyId && location.companyId !== where.companyId) return false;
+  if (where?.company && location.company.id !== where.company.id) return false;
   return true;
 };
 

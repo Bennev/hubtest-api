@@ -23,6 +23,7 @@ import {
 import { Location } from '../../../../domain/locations/location';
 import { UpdateLocationDto } from '../../../../applications/services/locations/update-location/update-location.dto';
 import { CreateLocationDto } from './create-location.dto';
+import { LocationView } from './location.view';
 
 @UseGuards(JwtAuthGuard)
 @Controller('locations')
@@ -47,10 +48,10 @@ export class LocationsController {
   @Post()
   async create(
     @Body() createLocationDto: CreateLocationDto,
-  ): Promise<Location> {
+  ): Promise<LocationView> {
     const location =
       await this.createLocationService.execute(createLocationDto);
-    return location;
+    return LocationView.toView(location);
   }
 
   @ApiOkResponse({
@@ -60,9 +61,9 @@ export class LocationsController {
     description: 'Invalid bearer token JWT',
   })
   @Get()
-  async findAll(@Body() companyId: string): Promise<Location[]> {
-    const locations = await this.findAllLocationsService.execute(companyId);
-    return locations;
+  async findAll(@Body() where: Partial<Location>): Promise<LocationView[]> {
+    const locations = await this.findAllLocationsService.execute({ where });
+    return locations.map((location) => LocationView.toView(location));
   }
 
   @ApiOkResponse({
@@ -77,7 +78,7 @@ export class LocationsController {
   @Get(':/locationId')
   async findOne(@Param('locationId') locationId: string) {
     const location = await this.findOneLocationService.execute(locationId);
-    return location;
+    return LocationView.toView(location);
   }
 
   @ApiOkResponse({
@@ -98,7 +99,7 @@ export class LocationsController {
       updateLocationDto,
       locationId,
     );
-    return location;
+    return LocationView.toView(location);
   }
 
   @ApiOkResponse({

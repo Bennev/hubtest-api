@@ -1,10 +1,11 @@
 import { randomUUID } from 'crypto';
+import { User } from '../users/user';
 
 export type CompanyProps = {
   name: string;
   website: string;
   cnpj: string;
-  userId: string;
+  user: User | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -14,26 +15,28 @@ type CompanyConstructor = {
   name: string;
   website: string;
   cnpj: string;
-  userId: string;
+  user?: User;
   createdAt?: Date;
   updatedAt?: Date;
 };
 
 export class Company {
   private readonly _id: string;
-  public props: Required<CompanyProps>;
+  private _name: string;
+  private _website: string;
+  private _cnpj: string;
+  private _user: User | null;
+  private _createdAt: Date;
+  private _updatedAt: Date;
 
   constructor(props: CompanyConstructor) {
     this._id = props.id ? props.id : randomUUID();
-
-    this.props = {
-      ...props,
-      name: props.name.replace(/\s+/g, ' ').trim(),
-      cnpj: props.cnpj.replace(/[^\d]+/g, ''),
-      userId: props.userId ?? null,
-      createdAt: props.createdAt ?? new Date(),
-      updatedAt: props.updatedAt ?? new Date(),
-    };
+    this._name = props.name;
+    this._website = props.website;
+    this._cnpj = props.cnpj;
+    this._user = props.user ?? null;
+    this._createdAt = props.createdAt ?? new Date();
+    this._updatedAt = props.updatedAt ?? new Date();
   }
 
   get id(): string {
@@ -41,42 +44,42 @@ export class Company {
   }
 
   get name(): string {
-    return this.props.name;
+    return this._name;
   }
 
   get website(): string {
-    return this.props.website;
+    return this._website;
   }
 
   get cnpj(): string {
-    return this.props.cnpj;
+    return this._cnpj;
   }
 
-  get userId(): string {
-    return this.props.userId;
+  get user(): User {
+    return this._user;
   }
 
   get createdAt(): Date {
-    return this.props.createdAt;
+    return this._createdAt;
   }
 
   get updatedAt(): Date {
-    return this.props.updatedAt;
+    return this._updatedAt;
   }
 
-  public set name(value: string) {
-    this.props.name = value;
+  set name(value: string) {
+    this._name = value.replace(/\s+/g, ' ').trim();
   }
 
-  public set website(value: string) {
-    this.props.website = value;
+  set website(value: string) {
+    this._website = value;
   }
 
-  public set cnpj(value: string) {
-    this.props.cnpj = value;
+  set cnpj(value: string) {
+    this._cnpj = value.replace(/[^\d]+/g, '');
   }
 
-  private set userId(value: string) {
-    this.props.userId = value;
+  set user(value: User) {
+    this._user = value;
   }
 }

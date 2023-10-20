@@ -21,6 +21,10 @@ export class CreateCompanyService {
     const isCnpj = cnpj.replace(/[^\d]+/g, '');
     const CNPJ_LENGTH = 14;
 
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!user) throw new DefaultError(errorMessages.user.notFound, 400);
+
     if (isCnpj.length !== CNPJ_LENGTH)
       throw new DefaultError(errorMessages.company.cnpjInvalid, 400);
 
@@ -31,15 +35,11 @@ export class CreateCompanyService {
     if (companyWithSameCnpj)
       throw new DefaultError(errorMessages.company.cnpjAlreadyInUse, 400);
 
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-
-    if (!user) throw new DefaultError(errorMessages.user.notFound, 400);
-
     const company = new Company({
       name: formattedName,
       website,
       cnpj: isCnpj,
-      userId,
+      user,
     });
 
     return await this.companyRepository.create(company);

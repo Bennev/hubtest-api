@@ -4,9 +4,9 @@ import { LocationRepositoryInterface } from '../../../../domain/locations/locati
 export class FindAllLocationsService {
   constructor(private locationRepository: LocationRepositoryInterface) {}
 
-  async execute(companyId: string): Promise<Location[]> {
+  async execute({ where }: { where?: Partial<Location> }): Promise<Location[]> {
     const locations = await this.locationRepository.findAll({
-      where: { companyId },
+      where,
     });
 
     return locations;

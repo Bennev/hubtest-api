@@ -4,9 +4,9 @@ import { CompanyRepositoryInterface } from '../../../../domain/companies/company
 export class FindAllCompaniesService {
   constructor(private companyRepository: CompanyRepositoryInterface) {}
 
-  async execute(userId: string): Promise<Company[]> {
+  async execute({ where }: { where?: Partial<Company> }): Promise<Company[]> {
     const companies = await this.companyRepository.findAll({
-      where: { userId },
+      where,
     });
 
     return companies;

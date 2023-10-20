@@ -23,6 +23,7 @@ import {
 import { Company } from '../../../../domain/companies/company';
 import { UpdateCompanyDto } from '../../../../applications/services/companies/update-company/update-company.dto';
 import { CreateCompanyDto } from './create-company.dto';
+import { CompanyView } from './company.view';
 
 @UseGuards(JwtAuthGuard)
 @Controller('companies')
@@ -45,9 +46,11 @@ export class CompaniesController {
     description: 'Invalid bearer token JWT',
   })
   @Post()
-  async create(@Body() createCompanyDto: CreateCompanyDto): Promise<Company> {
+  async create(
+    @Body() createCompanyDto: CreateCompanyDto,
+  ): Promise<CompanyView> {
     const company = await this.createCompanyService.execute(createCompanyDto);
-    return company;
+    return CompanyView.toView(company);
   }
 
   @ApiOkResponse({
@@ -57,9 +60,9 @@ export class CompaniesController {
     description: 'Invalid bearer token JWT',
   })
   @Get()
-  async findAll(@Body() userId: string): Promise<Company[]> {
-    const companies = await this.findAllCompaniesService.execute(userId);
-    return companies;
+  async findAll(@Body() where: Partial<Company>): Promise<CompanyView[]> {
+    const companies = await this.findAllCompaniesService.execute({ where });
+    return companies.map((company) => CompanyView.toView(company));
   }
 
   @ApiOkResponse({
@@ -74,7 +77,7 @@ export class CompaniesController {
   @Get(':/companyId')
   async findOne(@Param('companyId') companyId: string) {
     const company = await this.findOneCompanyService.execute(companyId);
-    return company;
+    return CompanyView.toView(company);
   }
 
   @ApiOkResponse({
@@ -95,7 +98,7 @@ export class CompaniesController {
       updateCompanyDto,
       companyId,
     );
-    return company;
+    return CompanyView.toView(company);
   }
 
   @ApiOkResponse({
