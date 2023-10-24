@@ -21,9 +21,9 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Location } from '../../../../domain/locations/location';
-import { UpdateLocationDto } from '../../../../applications/services/locations/update-location/update-location.dto';
 import { CreateLocationDto } from './create-location.dto';
 import { LocationView } from './location.view';
+import { UpdateLocationDto } from './update-location.dts';
 
 @UseGuards(JwtAuthGuard)
 @Controller('locations')
@@ -75,7 +75,7 @@ export class LocationsController {
   @ApiUnauthorizedResponse({
     description: 'Invalid bearer token JWT',
   })
-  @Get(':/locationId')
+  @Get(':locationId')
   async findOne(@Param('locationId') locationId: string) {
     const location = await this.findOneLocationService.execute(locationId);
     return LocationView.toView(location);
@@ -90,7 +90,7 @@ export class LocationsController {
   @ApiUnauthorizedResponse({
     description: 'Invalid bearer token JWT',
   })
-  @Put(':/locationId')
+  @Put(':locationId')
   async update(
     @Param('locationId') locationId: string,
     @Body() updateLocationDto: UpdateLocationDto,
@@ -111,7 +111,7 @@ export class LocationsController {
   @ApiUnauthorizedResponse({
     description: 'Invalid bearer token JWT',
   })
-  @Delete(':/locationId')
+  @Delete(':locationId')
   async remove(@Param('locationId') locationId: string) {
     await this.removeLocationService.execute(locationId);
   }

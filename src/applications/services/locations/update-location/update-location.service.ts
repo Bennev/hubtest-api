@@ -1,5 +1,5 @@
 import { LocationRepositoryInterface } from '../../../../domain/locations/location.repository';
-import { UpdateLocationDto } from './update-location.dto';
+import { UpdateLocationDtoInterface } from './update-location.dto';
 import { DefaultError } from '../../../errors/default-error';
 import { errorMessages } from '../../../errors/error-messages';
 import { Location } from '../../../../domain/locations/location';
@@ -8,7 +8,15 @@ export class UpdateLocationService {
   constructor(private locationRepository: LocationRepositoryInterface) {}
 
   async execute(
-    { name, cep, street, number, neighborhood, city, state }: UpdateLocationDto,
+    {
+      name,
+      cep,
+      street,
+      number,
+      neighborhood,
+      city,
+      state,
+    }: UpdateLocationDtoInterface,
     locationId: string,
   ): Promise<Location> {
     const location = await this.locationRepository.findOne({
@@ -24,8 +32,9 @@ export class UpdateLocationService {
 
     if (cep) {
       const cepOnlyNumbers = cep.replace(/\D/g, '');
+      const CEP_LENGTH = 8;
 
-      if (!cepOnlyNumbers)
+      if (!cepOnlyNumbers || cepOnlyNumbers.length !== CEP_LENGTH)
         throw new DefaultError(errorMessages.location.cepInvalid, 400);
 
       location.cep = cepOnlyNumbers;

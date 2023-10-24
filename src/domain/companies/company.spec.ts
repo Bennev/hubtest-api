@@ -32,7 +32,6 @@ describe('Company Test', () => {
 
   it('should be able to create a new company entity with all properties', () => {
     const company = new Company(companyProps);
-    console.log({ company });
 
     expect(company.id).toEqual(companyProps.id);
     expect(company.name).toEqual(companyProps.name);

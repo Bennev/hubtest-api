@@ -21,9 +21,9 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Company } from '../../../../domain/companies/company';
-import { UpdateCompanyDto } from '../../../../applications/services/companies/update-company/update-company.dto';
 import { CreateCompanyDto } from './create-company.dto';
 import { CompanyView } from './company.view';
+import { UpdateCompanyDto } from './update-company.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('companies')
@@ -74,7 +74,7 @@ export class CompaniesController {
   @ApiUnauthorizedResponse({
     description: 'Invalid bearer token JWT',
   })
-  @Get(':/companyId')
+  @Get(':companyId')
   async findOne(@Param('companyId') companyId: string) {
     const company = await this.findOneCompanyService.execute(companyId);
     return CompanyView.toView(company);
@@ -89,7 +89,7 @@ export class CompaniesController {
   @ApiUnauthorizedResponse({
     description: 'Invalid bearer token JWT',
   })
-  @Put(':/companyId')
+  @Put(':companyId')
   async update(
     @Param('companyId') companyId: string,
     @Body() updateCompanyDto: UpdateCompanyDto,
@@ -110,7 +110,7 @@ export class CompaniesController {
   @ApiUnauthorizedResponse({
     description: 'Invalid bearer token JWT',
   })
-  @Delete(':/companyId')
+  @Delete(':companyId')
   async remove(@Param('companyId') companyId: string) {
     await this.removeCompanyService.execute(companyId);
   }

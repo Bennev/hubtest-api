@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { Company } from '../companies/company';
 
 export type UserProps = {
   email: string;
@@ -20,6 +21,7 @@ export class User {
   private _email: string;
   private _name: string;
   private _password: string;
+  private _companies: Company[];
   private _createdAt: Date;
 
   constructor(props: UserConstructor) {
@@ -46,6 +48,10 @@ export class User {
     return this._password;
   }
 
+  get companies(): Company[] {
+    return this._companies;
+  }
+
   get createdAt(): Date {
     return this._createdAt;
   }
@@ -60,5 +66,9 @@ export class User {
 
   set password(value: string) {
     this._password = value;
+  }
+
+  set companies(companies: Company[]) {
+    this._companies = companies;
   }
 }

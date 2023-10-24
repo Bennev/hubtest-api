@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto';
 import { User } from '../users/user';
+import { Location } from '../locations/location';
 
 export type CompanyProps = {
   name: string;
@@ -16,6 +17,7 @@ type CompanyConstructor = {
   website: string;
   cnpj: string;
   user?: User;
+  locations?: Location[];
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -26,6 +28,7 @@ export class Company {
   private _website: string;
   private _cnpj: string;
   private _user: User | null;
+  private _locations: Location[] | null;
   private _createdAt: Date;
   private _updatedAt: Date;
 
@@ -35,6 +38,7 @@ export class Company {
     this._website = props.website;
     this._cnpj = props.cnpj.replace(/[^\d]+/g, '');
     this._user = props.user ?? null;
+    this._locations = props.locations ?? null;
     this._createdAt = props.createdAt ?? new Date();
     this._updatedAt = props.updatedAt ?? new Date();
   }
@@ -59,6 +63,10 @@ export class Company {
     return this._user;
   }
 
+  get locations(): Location[] {
+    return this._locations;
+  }
+
   get createdAt(): Date {
     return this._createdAt;
   }
@@ -81,5 +89,9 @@ export class Company {
 
   set user(value: User) {
     this._user = value;
+  }
+
+  set locations(value: Location[]) {
+    this._locations = value;
   }
 }

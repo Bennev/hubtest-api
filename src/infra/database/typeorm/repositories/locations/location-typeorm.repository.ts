@@ -16,14 +16,27 @@ export class LocationTypeOrmRepository implements LocationRepositoryInterface {
   async findOne({ where }: { where: Partial<Location> }): Promise<Location> {
     const newLocation = LocationMapper.toTypeOrm(where);
 
-    const locationFound = await this.ormRepo.findOne({ where: newLocation });
+    const locationFound = await this.ormRepo.findOne({
+      where: newLocation,
+      relations: {
+        company: {
+          user: true,
+        },
+      },
+    });
 
     if (!locationFound) return null;
     return LocationMapper.toLocal(locationFound);
   }
 
   async findAll({ where }: { where: Partial<Location> }): Promise<Location[]> {
-    const locations = await this.ormRepo.find();
+    const locations = await this.ormRepo.find({
+      relations: {
+        company: {
+          user: true,
+        },
+      },
+    });
     if (where.company) {
       const locationsByUser = locations.filter(
         (location) => location.company.id === where.company.id,

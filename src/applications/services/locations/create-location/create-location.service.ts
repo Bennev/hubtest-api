@@ -29,8 +29,9 @@ export class CreateLocationService {
 
     const formattedName = name.replace(/\s+/g, ' ').trim();
     const cepOnlyNumbers = cep.replace(/\D/g, '');
+    const CEP_LENGTH = 8;
 
-    if (!cepOnlyNumbers)
+    if (!cepOnlyNumbers || cepOnlyNumbers.length !== CEP_LENGTH)
       throw new DefaultError(errorMessages.location.cepInvalid, 400);
 
     const location = new Location({

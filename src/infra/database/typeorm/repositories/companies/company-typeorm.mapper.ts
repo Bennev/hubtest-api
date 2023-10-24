@@ -1,3 +1,4 @@
+import { User } from 'src/domain/users/user';
 import { Company } from '../../../../../domain/companies/company';
 import { CompanyTypeOrm } from '../../entities/company.entity';
 
@@ -9,20 +10,22 @@ export default class CompanyMapper {
     companyTypeOrm.name = company.name;
     companyTypeOrm.website = company.website;
     companyTypeOrm.cnpj = company.cnpj;
+    companyTypeOrm.user = company.user;
     companyTypeOrm.createdAt = company.createdAt;
     companyTypeOrm.updatedAt = company.updatedAt;
 
     return companyTypeOrm;
   }
 
-  public static toLocal(company: CompanyTypeOrm): Company {
+  public static toLocal(companyTypeOrm: CompanyTypeOrm): Company {
     return new Company({
-      id: company.id,
-      name: company.name,
-      website: company.website,
-      cnpj: company.cnpj,
-      createdAt: company.createdAt,
-      updatedAt: company.updatedAt,
+      id: companyTypeOrm.id,
+      name: companyTypeOrm.name,
+      website: companyTypeOrm.website,
+      cnpj: companyTypeOrm.cnpj,
+      user: new User(companyTypeOrm.user),
+      createdAt: companyTypeOrm.createdAt,
+      updatedAt: companyTypeOrm.updatedAt,
     });
   }
 }

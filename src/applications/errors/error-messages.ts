@@ -16,3 +16,5 @@ export const errorMessages = {
     cepInvalid: 'Cep informado é inválido',
   },
 };
+
+export const INTERNAL_SERVER_ERROR_MESSAGE = 'Ocorreu algo de errado';

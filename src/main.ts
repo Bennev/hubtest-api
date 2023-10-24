@@ -1,8 +1,9 @@
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { swaggerOptions } from './infra/nestjs/config/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { GlobalExceptionHandler } from './infra/nestjs/modules/errors/global-exception-handler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +16,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  app.useGlobalFilters(new GlobalExceptionHandler(app.get(HttpAdapterHost)));
 
   app.enableCors();
 

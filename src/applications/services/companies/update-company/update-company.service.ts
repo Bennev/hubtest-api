@@ -1,15 +1,14 @@
 import { Company } from '../../../../domain/companies/company';
 import { CompanyRepositoryInterface } from '../../../../domain/companies/company.repository';
-import { UpdateCompanyDto } from './update-company.dto';
+import { UpdateCompanyDtoInterface } from './update-company.dto';
 import { DefaultError } from '../../../errors/default-error';
 import { errorMessages } from '../../../errors/error-messages';
 
-//ERROR
 export class UpdateCompanyService {
   constructor(private companyRepository: CompanyRepositoryInterface) {}
 
   async execute(
-    { name, website, cnpj }: UpdateCompanyDto,
+    { name, website, cnpj }: UpdateCompanyDtoInterface,
     companyId: string,
   ): Promise<Company> {
     const company = await this.companyRepository.findOne({
