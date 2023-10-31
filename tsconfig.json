@@ -17,10 +17,5 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-    // "paths": {
-    //   "_domain/*": ["./src/domain/*"],
-    //   "_applications/*": ["./src/applications/*"],
-    //   "_infra/*": ["./src/infra/*"],
-    // }
   }
 }
