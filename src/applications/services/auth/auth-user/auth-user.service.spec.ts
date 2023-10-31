@@ -13,11 +13,7 @@ describe('Auth User Service', () => {
 
   const createUserService = new CreateUserService(userRepository, hasherPort);
 
-  const authUserService = new AuthUserService(
-    userRepository,
-    hasherPort,
-    jwtPort,
-  );
+  const authUserService = new AuthUserService(userRepository, jwtPort);
 
   beforeAll(async () => {
     user = await createUserService.execute({
@@ -28,38 +24,14 @@ describe('Auth User Service', () => {
   });
 
   it('should be able to authenticate an user', async () => {
-    const token = await authUserService.execute({
-      email: user.email,
-      password: 'test-password',
-    });
+    const token = await authUserService.execute(user.id);
 
     expect(token).toBeDefined();
   });
 
-  it('should not be able to authenticate an user with wrong email', () => {
-    expect(async () => {
-      await authUserService.execute({
-        email: 'fake-email@email.com',
-        password: 'test-password',
-      });
-    }).rejects.toThrowError();
-  });
-
-  it('should not be able to authenticate an user with wrong password', () => {
-    expect(async () => {
-      await authUserService.execute({
-        email: user.email,
-        password: 'fake-password',
-      });
-    }).rejects.toThrowError();
-  });
-
   it('should not be able to authenticate an inexistent user', () => {
     expect(async () => {
-      await authUserService.execute({
-        email: 'fake-email@email.com',
-        password: 'fake-password',
-      });
+      await authUserService.execute('fake-userId');
     }).rejects.toThrowError();
   });
 });
