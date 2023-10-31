@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
 import { AdaptersModule } from '../adapters/adapters.module';
 import { LocalStrategy } from '../../strategies/local.strategy';
@@ -9,23 +8,29 @@ import { AuthUserService } from '../../../../applications/services/auth/auth-use
 import { JwtPort } from '../../../../applications/ports/jwt.port';
 import { VerifyTokenService } from '../../../../applications/services/auth/verify-token/verify-token.service';
 import { AuthController } from './auth.controller';
+import { UserRepositoryInterface } from '../../../../domain/users/user.repository';
+import { DatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    PassportModule,
     UsersModule,
     AdaptersModule,
+    DatabaseModule,
   ],
+  controllers: [AuthController],
   providers: [
     LocalStrategy,
     JwtStrategy,
     {
       provide: AuthUserService,
-      useFactory: (jwtPort: JwtPort) => {
-        return new AuthUserService(jwtPort);
+      useFactory: (
+        userRepository: UserRepositoryInterface,
+        jwtPort: JwtPort,
+      ) => {
+        return new AuthUserService(userRepository, jwtPort);
       },
-      inject: [JwtPort],
+      inject: [UserRepositoryInterface, JwtPort],
     },
     {
       provide: VerifyTokenService,
@@ -35,6 +40,5 @@ import { AuthController } from './auth.controller';
       inject: [JwtPort],
     },
   ],
-  controllers: [AuthController],
 })
 export class AuthModule {}
