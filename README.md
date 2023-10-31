@@ -1,6 +1,6 @@
 # Clean/Hexagonal Architecture
 
-This is a project for managing users, companies and locations. In this application, a user can own multiple companies and each company can own multiple locations.
+This is a back-end project for managing users, companies and locations. In this application, a user can own multiple companies and each company can own multiple locations.
 
 ## Summary
 
