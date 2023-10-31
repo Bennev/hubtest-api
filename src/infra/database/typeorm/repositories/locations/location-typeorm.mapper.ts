@@ -1,7 +1,7 @@
-import { Company } from 'src/domain/companies/company';
+import { Company } from '../../../../../domain/companies/company';
 import { Location } from '../../../../../domain/locations/location';
 import { LocationTypeOrm } from '../../entities/location.entity';
-import { User } from 'src/domain/users/user';
+import { User } from '../../../../../domain/users/user';
 
 export default class LocationMapper {
   public static toTypeOrm(location: Partial<Location>): LocationTypeOrm {

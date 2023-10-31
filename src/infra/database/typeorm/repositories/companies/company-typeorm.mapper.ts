@@ -1,4 +1,4 @@
-import { User } from 'src/domain/users/user';
+import { User } from '../../../../../domain/users/user';
 import { Company } from '../../../../../domain/companies/company';
 import { CompanyTypeOrm } from '../../entities/company.entity';
 
