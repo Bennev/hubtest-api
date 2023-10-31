@@ -18,7 +18,7 @@ This is a project for managing users, companies and locations. In this applicati
 
 - Node
 - NestJS
-- PostGres
+- Postgres
 - TypeOrm
 
 ### Getting Started
